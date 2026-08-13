@@ -1,1 +1,2147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vertex Forex Academy</title>
 
+  <!-- YOUR LOGO -->
+  <!-- Place logo here: assets/images/logo.png -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #030504;
+      --panel: #080b09;
+      --panel2: #0d110e;
+      --border: #222823;
+      --green: #7dff00;
+      --green2: #a7ff3d;
+      --text: #f4f6f2;
+      --muted: #8c958c;
+      --danger: #ff5757;
+      --blue: #1d9bf0;
+      --gold: #d6bd52;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    /* ================================
+       GLOBAL
+    ================================= */
+
+    .container {
+      width: min(1240px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    .green {
+      color: var(--green);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: .25s;
+    }
+
+    .btn-green {
+      background: var(--green);
+      color: #071000;
+    }
+
+    .btn-green:hover {
+      background: var(--green2);
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(125,255,0,.15);
+    }
+
+    .btn-outline {
+      border-color: #384038;
+      background: transparent;
+      color: #fff;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: .03em;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    /* ================================
+       NAVBAR
+    ================================= */
+
+    .navbar {
+      height: 62px;
+      border-bottom: 1px solid #202520;
+      background: rgba(3,5,4,.95);
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(15px);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      width: 155px;
+    }
+
+    .logo img {
+      width: 145px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      font-size: 11px;
+      color: #d4d9d3;
+    }
+
+    .nav-links a {
+      transition: .2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--green);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .theme {
+      color: #b3bbb1;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .nav-login {
+      padding: 9px 17px;
+      border: 1px solid #323832;
+      border-radius: 5px;
+      font-size: 11px;
+    }
+
+    .nav-register {
+      padding: 9px 17px;
+      background: var(--green);
+      color: #071000;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .mobile-menu {
+      display: none;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 24px;
+    }
+
+    /* ================================
+       HERO
+    ================================= */
+
+    .hero {
+      min-height: 460px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 70% 50%, rgba(67,255,0,.08), transparent 28%),
+        linear-gradient(120deg,#020302,#061008 55%,#020302);
+    }
+
+    .hero-chart {
+      position: absolute;
+      inset: 0;
+      opacity: .16;
+      background-image:
+        linear-gradient(rgba(125,255,0,.08) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(125,255,0,.08) 1px,transparent 1px);
+      background-size: 45px 45px;
+      transform: skewY(-4deg) scale(1.2);
+    }
+
+    .candles {
+      position: absolute;
+      right: 0;
+      top: 80px;
+      width: 60%;
+      height: 320px;
+      opacity: .45;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          transparent 0 24px,
+          rgba(125,255,0,.7) 25px 27px,
+          transparent 28px 55px
+        );
+      mask-image: linear-gradient(90deg, transparent, black);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      min-height: 460px;
+    }
+
+    .hero-content {
+      width: 54%;
+      padding-top: 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border: 1px solid #263028;
+      background: #071008;
+      border-radius: 30px;
+      color: #cbd1ca;
+      font-size: 9px;
+      margin-bottom: 15px;
+    }
+
+    .badge::before {
+      content: "✦";
+      color: var(--green);
+      margin-right: 6px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px,5vw,56px);
+      line-height: .98;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      max-width: 620px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 span {
+      color: var(--green);
+    }
+
+    .hero-description {
+      max-width: 490px;
+      color: #b2b9b1;
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 9px;
+      margin-bottom: 22px;
+    }
+
+    .students {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 9px;
+      color: #b0b7ae;
+    }
+
+    .avatars {
+      display: flex;
+    }
+
+    .avatar {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,#666,#171917);
+      border: 2px solid #050705;
+      margin-left: -6px;
+    }
+
+    .avatar:first-child {
+      margin-left: 0;
+    }
+
+    .rating {
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+
+    .hero-logo {
+      position: absolute;
+      right: 20%;
+      top: 55px;
+      width: 245px;
+      height: 245px;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-logo img {
+      width: 240px;
+      max-height: 240px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 25px rgba(125,255,0,.18));
+    }
+
+    .market-card {
+      position: absolute;
+      right: 5%;
+      bottom: 45px;
+      width: 180px;
+      background: rgba(8,11,9,.93);
+      border: 1px solid #293129;
+      border-radius: 8px;
+      padding: 13px;
+      z-index: 5;
+      box-shadow: 0 20px 50px rgba(0,0,0,.4);
+    }
+
+    .market-title {
+      font-size: 10px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .market-title::before {
+      content: "";
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      margin-right: 5px;
+      box-shadow: 0 0 10px var(--green);
+    }
+
+    .market-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid #1b201c;
+      font-size: 8px;
+      color: #9ca59b;
+    }
+
+    .market-row strong {
+      color: var(--green);
+    }
+
+    /* ================================
+       FEATURE STRIP
+    ================================= */
+
+    .features {
+      padding: 25px 0 15px;
+      background: #040605;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(6,1fr);
+      gap: 10px;
+    }
+
+    .feature-card {
+      min-height: 105px;
+      padding: 16px 10px;
+      text-align: center;
+      background: linear-gradient(145deg,#0b0f0c,#060806);
+      border: 1px solid #252b25;
+      border-radius: 7px;
+      transition: .25s;
+    }
+
+    .feature-card:hover {
+      border-color: #526a45;
+      transform: translateY(-3px);
+    }
+
+    .feature-icon {
+      font-size: 21px;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+
+    .feature-card h3 {
+      font-size: 10px;
+      margin-bottom: 6px;
+    }
+
+    .feature-card p {
+      font-size: 8px;
+      line-height: 1.45;
+      color: #778078;
+      margin-bottom: 8px;
+    }
+
+    .explore {
+      color: var(--green);
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    /* ================================
+       WHY VERTEX
+    ================================= */
+
+    .why-section {
+      padding: 20px 0;
+      background: #030504;
+    }
+
+    .why-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 10px;
+    }
+
+    .why-box {
+      border: 1px solid #242924;
+      background: #070a08;
+      border-radius: 7px;
+      padding: 18px;
+    }
+
+    .why-items {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 12px;
+    }
+
+    .why-item {
+      text-align: center;
+    }
+
+    .why-icon {
+      color: var(--green);
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .why-item h4 {
+      font-size: 9px;
+      margin-bottom: 5px;
+    }
+
+    .why-item p {
+      color: #737b73;
+      font-size: 7px;
+      line-height: 1.4;
+    }
+
+    .join-box {
+      border: 1px solid #242924;
+      background:
+        radial-gradient(circle at 90% 10%,rgba(125,255,0,.08),transparent 40%),
+        #070a08;
+      border-radius: 7px;
+      padding: 22px;
+      text-align: center;
+    }
+
+    .join-box h3 {
+      font-size: 15px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .join-box p {
+      font-size: 8px;
+      color: #858d84;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .join-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+    }
+
+    .small-btn {
+      padding: 8px 12px;
+      font-size: 8px;
+    }
+
+    /* ================================
+       MOBILE PREVIEW
+    ================================= */
+
+    .mobile-section {
+      padding: 25px 0;
+      background: #030504;
+    }
+
+    .phone-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 15px;
+    }
+
+    .phone {
+      height: 350px;
+      border: 5px solid #161a17;
+      border-radius: 25px;
+      background: #050705;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,.35);
+    }
+
+    .phone-notch {
+      width: 65px;
+      height: 15px;
+      background: #111510;
+      border-radius: 0 0 12px 12px;
+      margin: auto;
+    }
+
+    .phone-header {
+      padding: 15px 12px;
+      border-bottom: 1px solid #20251f;
+    }
+
+    .phone-logo {
+      width: 100px;
+    }
+
+    .phone-logo img {
+      width: 100%;
+    }
+
+    .phone-content {
+      padding: 15px 10px;
+    }
+
+    .phone-content h3 {
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+
+    .phone-content p {
+      font-size: 7px;
+      color: #7d857c;
+      line-height: 1.5;
+      margin-bottom: 13px;
+    }
+
+    .phone-box {
+      border: 1px solid #202720;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 7px;
+      background: #080b08;
+    }
+
+    .phone-box h4 {
+      font-size: 8px;
+      margin-bottom: 7px;
+    }
+
+    .progress {
+      height: 4px;
+      border-radius: 5px;
+      background: #1b201b;
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 75%;
+      background: var(--green);
+    }
+
+    .signal-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 7px;
+      color: #9ba49a;
+      padding: 6px 0;
+      border-bottom: 1px solid #191e19;
+    }
+
+    /* ================================
+       STATS
+    ================================= */
+
+    .stats {
+      margin-top: -1px;
+      background: #060906;
+      border: 1px solid #252b25;
+      border-radius: 7px 7px 0 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(5,1fr);
+    }
+
+    .stat {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px;
+      border-right: 1px solid #202520;
+    }
+
+    .stat-icon {
+      color: var(--green);
+      font-size: 17px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .stat span {
+      display: block;
+      font-size: 7px;
+      color: #747d74;
+      margin-top: 2px;
+    }
+
+    /* ================================
+       DASHBOARD PREVIEWS
+    ================================= */
+
+    .dashboard-section {
+      padding: 40px 0;
+      background: #020302;
+    }
+
+    .dashboard-title {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      margin: 15px 0 8px;
+      text-transform: uppercase;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      min-height: 370px;
+      border: 1px solid #242a24;
+      background: #080b09;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      background: #070a08;
+      border-right: 1px solid #232823;
+      padding: 15px 10px;
+    }
+
+    .side-logo {
+      width: 105px;
+      margin: 0 auto 22px;
+    }
+
+    .side-logo img {
+      width: 100%;
+    }
+
+    .side-link {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 9px;
+      border-radius: 5px;
+      font-size: 8px;
+      color: #8d968d;
+      margin-bottom: 3px;
+    }
+
+    .side-link.active {
+      background: rgba(125,255,0,.12);
+      color: var(--green);
+    }
+
+    .dashboard-main {
+      padding: 14px;
+      overflow: hidden;
+    }
+
+    .dashboard-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 13px;
+    }
+
+    .welcome h3 {
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .welcome p {
+      font-size: 7px;
+      color: #788078;
+    }
+
+    .dashboard-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,#777,#202420);
+    }
+
+    .dashboard-stats {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 7px;
+      margin-bottom: 10px;
+    }
+
+    .dashboard-stat {
+      padding: 11px;
+      background: #0b0f0c;
+      border: 1px solid #202720;
+      border-radius: 5px;
+    }
+
+    .dashboard-stat small {
+      display: block;
+      color: #6f786f;
+      font-size: 6px;
+      margin-bottom: 7px;
+    }
+
+    .dashboard-stat strong {
+      font-size: 16px;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 8px;
+    }
+
+    .dashboard-panel {
+      background: #0b0f0c;
+      border: 1px solid #202720;
+      border-radius: 5px;
+      padding: 12px;
+      min-height: 115px;
+    }
+
+    .dashboard-panel h4 {
+      font-size: 8px;
+      margin-bottom: 12px;
+    }
+
+    .course-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      border-bottom: 1px solid #171c17;
+    }
+
+    .course-thumb {
+      width: 34px;
+      height: 25px;
+      background: linear-gradient(135deg,#102312,#071008);
+      border-radius: 3px;
+      border: 1px solid #233122;
+    }
+
+    .course-info {
+      flex: 1;
+    }
+
+    .course-info strong {
+      display: block;
+      font-size: 7px;
+    }
+
+    .course-info span {
+      font-size: 6px;
+      color: #697169;
+    }
+
+    .chart {
+      height: 80px;
+      position: relative;
+      margin-top: 5px;
+      background:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+      background-size: 25px 25px;
+    }
+
+    .chart svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ================================
+       FOOTER
+    ================================= */
+
+    footer {
+      border-top: 1px solid #1c211d;
+      padding: 30px 0;
+      background: #020302;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      width: 120px;
+    }
+
+    .footer-logo img {
+      width: 100%;
+    }
+
+    .footer-text {
+      color: #596159;
+      font-size: 8px;
+    }
+
+    /* ================================
+       RESPONSIVE
+    ================================= */
+
+    @media(max-width:1000px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .hero-content {
+        width: 65%;
+      }
+
+      .hero-logo {
+        right: 8%;
+        width: 190px;
+      }
+
+      .hero-logo img {
+        width: 190px;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(3,1fr);
+      }
+
+      .phone-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+    }
+
+    @media(max-width:700px) {
+
+      .container {
+        width: calc(100% - 24px);
+      }
+
+      .navbar {
+        height: 58px;
+      }
+
+      .logo {
+        width: 125px;
+      }
+
+      .logo img {
+        width: 120px;
+      }
+
+      .nav-actions {
+        display: none;
+      }
+
+      .hero {
+        min-height: 680px;
+      }
+
+      .hero-inner {
+        min-height: 680px;
+        align-items: flex-end;
+        padding-bottom: 45px;
+      }
+
+      .hero-content {
+        width: 100%;
+        position: relative;
+        z-index: 8;
+      }
+
+      .hero h1 {
+        font-size: 43px;
+      }
+
+      .hero-description {
+        font-size: 11px;
+        max-width: 370px;
+      }
+
+      .hero-logo {
+        top: 70px;
+        right: 50%;
+        transform: translateX(50%);
+        width: 170px;
+        height: 170px;
+        opacity: .65;
+      }
+
+      .hero-logo img {
+        width: 170px;
+      }
+
+      .market-card {
+        display: none;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .why-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .why-items {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .phone-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .phone {
+        height: 300px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .stat {
+        border-bottom: 1px solid #202520;
+      }
+
+      .dashboard {
+        grid-template-columns: 105px 1fr;
+      }
+
+      .dashboard-stats {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .side-link {
+        font-size: 7px;
+      }
+
+      .side-logo {
+        width: 80px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+
+    @media(max-width:430px) {
+
+      .feature-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .phone-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .phone {
+        height: 270px;
+      }
+
+      .dashboard {
+        grid-template-columns: 90px 1fr;
+      }
+
+      .dashboard-main {
+        min-width: 0;
+      }
+
+      .dashboard-stats {
+        grid-template-columns: repeat(2,1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================================
+       NAVIGATION
+  ========================================================== -->
+
+  <nav class="navbar">
+
+    <div class="container nav-inner">
+
+      <a href="#" class="logo">
+        <img src="assets/images/logo.png" alt="Vertex Forex Academy">
+      </a>
+
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#academy">Academy</a>
+        <a href="#signals">Signals</a>
+        <a href="#hft">HFT Bot</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="nav-actions">
+        <span class="theme">☼</span>
+        <span class="theme">◐</span>
+
+        <a href="#" class="nav-login">
+          Login
+        </a>
+
+        <a href="#" class="nav-register">
+          Register Now
+        </a>
+      </div>
+
+      <button class="mobile-menu">
+        ☰
+      </button>
+
+    </div>
+
+  </nav>
+
+
+  <!-- =========================================================
+       HERO
+  ========================================================== -->
+
+  <section class="hero">
+
+    <div class="hero-chart"></div>
+    <div class="candles"></div>
+
+    <div class="hero-logo">
+      <img src="assets/images/logo.png" alt="Vertex">
+    </div>
+
+    <div class="container hero-inner">
+
+      <div class="hero-content">
+
+        <div class="badge">
+          #1 FOREX ACADEMY IN AFRICA
+        </div>
+
+        <h1>
+          MASTER FOREX TRADING<br>
+          WITH <span>CONFIDENCE</span>
+        </h1>
+
+        <p class="hero-description">
+          Learn from the best, access premium signals, and use our HFT Bot
+          to trade like a professional.
+        </p>
+
+        <div class="hero-buttons">
+
+          <a href="#" class="btn btn-green">
+            Register Now
+          </a>
+
+          <a href="#" class="btn btn-outline">
+            Join Telegram
+          </a>
+
+        </div>
+
+        <div class="students">
+
+          <div class="avatars">
+            <div class="avatar"></div>
+            <div class="avatar"></div>
+            <div class="avatar"></div>
+            <div class="avatar"></div>
+          </div>
+
+          <strong>
+            <span class="green">10,000+</span><br>
+            Students Worldwide
+          </strong>
+
+          <span class="rating">
+            ★★★★★
+          </span>
+
+          <span>
+            Google Reviews
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- LIVE MARKET SUMMARY -->
+
+    <div class="market-card">
+
+      <div class="market-title">
+        LIVE MARKET SUMMARY
+      </div>
+
+      <div class="market-row">
+        <span>EUR/USD</span>
+        <strong>1.08452 +0.35%</strong>
+      </div>
+
+      <div class="market-row">
+        <span>GBP/USD</span>
+        <strong>1.2648 +0.21%</strong>
+      </div>
+
+      <div class="market-row">
+        <span>XAU/USD</span>
+        <strong>2,345.65 +0.78%</strong>
+      </div>
+
+      <div class="market-row">
+        <span>BTC/USD</span>
+        <strong>67,892.45 +1.25%</strong>
+      </div>
+
+      <div class="market-row">
+        <span>US30</span>
+        <strong>38,764.50 +0.45%</strong>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       FEATURES
+  ========================================================== -->
+
+  <section class="features" id="academy">
+
+    <div class="container">
+
+      <div class="section-title">
+        EVERYTHING YOU NEED TO SUCCEED
+      </div>
+
+      <div class="feature-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">🎓</div>
+          <h3>Forex Academy</h3>
+          <p>Step by step courses from beginner to advanced level</p>
+          <a href="#" class="explore">Explore →</a>
+        </div>
+
+        <div class="feature-card" id="signals">
+          <div class="feature-icon">▥</div>
+          <h3>Premium Signals</h3>
+          <p>Accurate daily signals for forex, gold & indices</p>
+          <a href="#" class="explore">Explore →</a>
+        </div>
+
+        <div class="feature-card" id="hft">
+          <div class="feature-icon">✺</div>
+          <h3>Vertex HFT Bot</h3>
+          <p>AI powered HFT Bot for consistent profits</p>
+          <a href="#" class="explore">Explore →</a>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">♧</div>
+          <h3>Live Classes</h3>
+          <p>Weekly live classes with expert traders</p>
+          <a href="#" class="explore">Explore →</a>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">♧</div>
+          <h3>Certificates</h3>
+          <p>Get certified and boost your trading career</p>
+          <a href="#" class="explore">Explore →</a>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">▣</div>
+          <h3>Prop Firm Services</h3>
+          <p>Get funded and scale your trading</p>
+          <a href="#" class="explore">Explore →</a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       WHY VERTEX
+  ========================================================== -->
+
+  <section class="why-section" id="about">
+
+    <div class="container">
+
+      <div class="why-layout">
+
+        <div class="why-box">
+
+          <div class="section-title">
+            WHY CHOOSE VERTEX?
+          </div>
+
+          <div class="why-items">
+
+            <div class="why-item">
+              <div class="why-icon">♙</div>
+              <h4>Expert Mentors</h4>
+              <p>Learn from professional traders</p>
+            </div>
+
+            <div class="why-item">
+              <div class="why-icon">▥</div>
+              <h4>Proven Strategies</h4>
+              <p>Smart money concepts & more</p>
+            </div>
+
+            <div class="why-item">
+              <div class="why-icon">◷</div>
+              <h4>24/7 Support</h4>
+              <p>We are here for you always</p>
+            </div>
+
+            <div class="why-item">
+              <div class="why-icon">◎</div>
+              <h4>Global Community</h4>
+              <p>Join thousands of serious traders</p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="join-box">
+
+          <h3>
+            READY TO START YOUR<br>
+            <span class="green">TRADING JOURNEY?</span>
+          </h3>
+
+          <p>
+            Join thousands of successful students and become
+            consistently profitable.
+          </p>
+
+          <div class="join-buttons">
+
+            <a href="#" class="btn btn-green small-btn">
+              Register Now
+            </a>
+
+            <a href="#" class="btn btn-outline small-btn">
+              Join Telegram
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       MOBILE APP PREVIEW
+  ========================================================== -->
+
+  <section class="mobile-section">
+
+    <div class="container">
+
+      <div class="phone-grid">
+
+        <!-- PHONE 1 -->
+
+        <div class="phone">
+
+          <div class="phone-notch"></div>
+
+          <div class="phone-header">
+            <div class="phone-logo">
+              <img src="assets/images/logo.png" alt="Vertex">
+            </div>
+          </div>
+
+          <div class="phone-content">
+
+            <h3>
+              Welcome Back
+            </h3>
+
+            <p>
+              Continue your trading education and
+              improve your skills every day.
+            </p>
+
+            <div class="phone-box">
+              <h4>My Progress</h4>
+
+              <div class="progress">
+                <span></span>
+              </div>
+            </div>
+
+            <div class="phone-box">
+              <h4>Continue Learning</h4>
+              <p>Smart Money Concepts</p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- PHONE 2 -->
+
+        <div class="phone">
+
+          <div class="phone-notch"></div>
+
+          <div class="phone-header">
+            <h4>Courses</h4>
+          </div>
+
+          <div class="phone-content">
+
+            <div class="phone-box">
+              <h4>Smart Money Concepts</h4>
+
+              <div class="progress">
+                <span style="width:75%"></span>
+              </div>
+            </div>
+
+            <div class="phone-box">
+              <h4>Advanced Price Action</h4>
+
+              <div class="progress">
+                <span style="width:60%"></span>
+              </div>
+            </div>
+
+            <div class="phone-box">
+              <h4>Risk Management</h4>
+
+              <div class="progress">
+                <span style="width:85%"></span>
+              </div>
+            </div>
+
+            <div class="phone-box">
+              <h4>Technical Analysis</h4>
+
+              <div class="progress">
+                <span style="width:65%"></span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- PHONE 3 -->
+
+        <div class="phone">
+
+          <div class="phone-notch"></div>
+
+          <div class="phone-header">
+            <h4>Signals</h4>
+          </div>
+
+          <div class="phone-content">
+
+            <div class="signal-row">
+              <span>XAU/USD</span>
+              <strong class="green">BUY</strong>
+            </div>
+
+            <div class="signal-row">
+              <span>EUR/USD</span>
+              <strong style="color:#ff5757">SELL</strong>
+            </div>
+
+            <div class="signal-row">
+              <span>GBP/USD</span>
+              <strong class="green">BUY</strong>
+            </div>
+
+            <div class="phone-box" style="margin-top:15px">
+              <h4>Entry</h4>
+              <p>2,345.50</p>
+              <h4>TP</h4>
+              <p>2,375.00</p>
+              <h4>SL</h4>
+              <p>2,315.00</p>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- PHONE 4 -->
+
+        <div class="phone">
+
+          <div class="phone-notch"></div>
+
+          <div class="phone-header">
+            <h4>Vertex HFT Bot</h4>
+          </div>
+
+          <div class="phone-content">
+
+            <div class="phone-box">
+
+              <h4>Bot Status</h4>
+
+              <strong class="green">
+                ● Active
+              </strong>
+
+            </div>
+
+            <div class="phone-box">
+
+              <h4>Daily Profit</h4>
+
+              <strong class="green">
+                +12.45%
+              </strong>
+
+            </div>
+
+            <div class="phone-box">
+
+              <h4>Total Profit</h4>
+
+              <strong class="green">
+                +245.65%
+              </strong>
+
+            </div>
+
+            <div class="chart">
+
+              <svg viewBox="0 0 300 100">
+
+                <polyline
+                  points="0,85 25,78 45,82 70,60 95,65 115,40 140,47 165,28 190,35 215,20 240,25 265,10 300,5"
+                  fill="none"
+                  stroke="#7dff00"
+                  stroke-width="3"
+                />
+
+              </svg>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       STATS
+  ========================================================== -->
+
+  <section class="stats">
+
+    <div class="container stats-grid">
+
+      <div class="stat">
+        <div class="stat-icon">♙</div>
+        <div>
+          <strong>100+</strong>
+          <span>Expert Mentors</span>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-icon">♙</div>
+        <div>
+          <strong>10,000+</strong>
+          <span>Students</span>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-icon">▣</div>
+        <div>
+          <strong>500+</strong>
+          <span>Courses & Lessons</span>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-icon">◉</div>
+        <div>
+          <strong>99.9%</strong>
+          <span>Platform Availability</span>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-icon">◷</div>
+        <div>
+          <strong>24/7</strong>
+          <span>Support</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       STUDENT DASHBOARD PREVIEW
+  ========================================================== -->
+
+  <section class="dashboard-section">
+
+    <div class="container">
+
+      <div class="dashboard-title">
+        STUDENT DASHBOARD
+      </div>
+
+      <div class="dashboard">
+
+        <aside class="sidebar">
+
+          <div class="side-logo">
+            <img src="assets/images/logo.png" alt="Vertex">
+          </div>
+
+          <div class="side-link active">▣ Dashboard</div>
+          <div class="side-link">▤ My Courses</div>
+          <div class="side-link">◉ Live Classes</div>
+          <div class="side-link">◈ Signals</div>
+          <div class="side-link">▣ Certificates</div>
+          <div class="side-link">⚙ HFT Bot</div>
+          <div class="side-link">↓ Downloads</div>
+          <div class="side-link">▣ Payments</div>
+          <div class="side-link">♙ Profile</div>
+          <div class="side-link">♧ Notifications</div>
+          <div class="side-link">? Support</div>
+          <div class="side-link">↪ Logout</div>
+
+        </aside>
+
+
+        <main class="dashboard-main">
+
+          <div class="dashboard-top">
+
+            <div class="welcome">
+
+              <h3>
+                Welcome Back, <span class="green">Wasili Yusuf</span>
+              </h3>
+
+              <p>
+                Keep learning, keep growing!
+              </p>
+
+            </div>
+
+            <div class="dashboard-avatar"></div>
+
+          </div>
+
+
+          <div class="dashboard-stats">
+
+            <div class="dashboard-stat">
+              <small>Enrolled Courses</small>
+              <strong>8</strong>
+            </div>
+
+            <div class="dashboard-stat">
+              <small>Completed Courses</small>
+              <strong>5</strong>
+            </div>
+
+            <div class="dashboard-stat">
+              <small>Certificates Earned</small>
+              <strong>3</strong>
+            </div>
+
+            <div class="dashboard-stat">
+              <small>Active Signals</small>
+              <strong>12</strong>
+            </div>
+
+          </div>
+
+
+          <div class="dashboard-grid">
+
+            <div class="dashboard-panel">
+
+              <h4>
+                My Courses
+              </h4>
+
+              <div class="course-row">
+                <div class="course-thumb"></div>
+
+                <div class="course-info">
+                  <strong>Smart Money Concepts</strong>
+                  <span>75% Complete</span>
+                </div>
+
+                <span class="green">75%</span>
+              </div>
+
+              <div class="course-row">
+                <div class="course-thumb"></div>
+
+                <div class="course-info">
+                  <strong>Advanced Price Action</strong>
+                  <span>60% Complete</span>
+                </div>
+
+                <span class="green">60%</span>
+              </div>
+
+              <div class="course-row">
+                <div class="course-thumb"></div>
+
+                <div class="course-info">
+                  <strong>Risk Management</strong>
+                  <span>85% Complete</span>
+                </div>
+
+                <span class="green">85%</span>
+              </div>
+
+              <div class="course-row">
+                <div class="course-thumb"></div>
+
+                <div class="course-info">
+                  <strong>Technical Analysis</strong>
+                  <span>75% Complete</span>
+                </div>
+
+                <span class="green">75%</span>
+              </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+              <h4>
+                Recent Signals
+              </h4>
+
+              <div class="signal-row">
+                <span>XAU/USD</span>
+                <strong class="green">BUY</strong>
+              </div>
+
+              <div class="signal-row">
+                <span>EUR/USD</span>
+                <strong style="color:#ff5757">SELL</strong>
+              </div>
+
+              <div class="signal-row">
+                <span>GBP/USD</span>
+                <strong class="green">BUY</strong>
+              </div>
+
+              <div class="signal-row">
+                <span>BTC/USD</span>
+                <strong class="green">BUY</strong>
+              </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+              <h4>
+                Your Progress
+              </h4>
+
+              <div class="progress">
+                <span style="width:75%"></span>
+              </div>
+
+              <p style="font-size:7px;color:#788078;margin-top:8px">
+                75% Course Completion
+              </p>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+              <h4>
+                Upcoming Live Class
+              </h4>
+
+              <strong style="font-size:9px">
+                Market Structure
+              </strong>
+
+              <p style="font-size:7px;color:#747d74;margin-top:6px">
+                Break of Structure
+              </p>
+
+              <a href="#" class="btn btn-green" style="font-size:7px;padding:6px 9px;margin-top:8px">
+                Join Class
+              </a>
+
+            </div>
+
+          </div>
+
+        </main>
+
+      </div>
+
+
+      <!-- =====================================================
+           SUPER ADMIN
+      ====================================================== -->
+
+      <div class="dashboard-title">
+        SUPER ADMIN DASHBOARD
+      </div>
+
+      <div class="dashboard">
+
+        <aside class="sidebar">
+
+          <div class="side-logo">
+            <img src="assets/images/logo.png" alt="Vertex">
+          </div>
+
+          <div class="side-link active">▣ Dashboard</div>
+          <div class="side-link">♙ Students</div>
+          <div class="side-link">▤ Courses</div>
+          <div class="side-link">◈ Signals</div>
+          <div class="side-link">⚙ HFT Bot</div>
+          <div class="side-link">▣ Payments</div>
+          <div class="side-link">▤ Certificates</div>
+          <div class="side-link">♙ Instructors</div>
+          <div class="side-link">▣ Announcements</div>
+          <div class="side-link">▥ Analytics</div>
+          <div class="side-link">⚙ Settings</div>
+          <div class="side-link">↪ Logout</div>
+
+        </aside>
+
+
+        <main class="dashboard-main">
+
+          <div class="dashboard-stats">
+
+            <div class="dashboard-stat">
+              <small>Total Students</small>
+              <strong>10,458</strong>
+              <span class="green">+12.5%</span>
+            </div>
+
+            <div class="dashboard-stat">
+              <small>Total Courses</small>
+              <strong>35</strong>
+              <span class="green">+8.3%</span>
+            </div>
+
+            <div class="dashboard-stat">
+              <small>Total Revenue</small>
+              <strong>$125K</strong>
+              <span class="green">+15.7%</span>
+            </div>
+
+            <div class="dashboard-stat">
+              <small>Active Signals</small>
+              <strong>128</strong>
+              <span class="green">+10.2%</span>
+            </div>
+
+          </div>
+
+
+          <div class="dashboard-grid">
+
+            <div class="dashboard-panel">
+
+              <h4>
+                Revenue Overview
+              </h4>
+
+              <div class="chart">
+
+                <svg viewBox="0 0 500 120">
+
+                  <polyline
+                    points="0,100 30,90 55,94 80,78 105,83 130,65 160,72 185,53 215,59 245,45 275,50 305,35 335,40 365,26 400,32 430,15 470,8 500,0"
+                    fill="none"
+                    stroke="#7dff00"
+                    stroke-width="3"
+                  />
+
+                </svg>
+
+              </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+              <h4>
+                Students Growth
+              </h4>
+
+              <div style="
+                display:flex;
+                align-items:end;
+                height:90px;
+                gap:10px;
+              ">
+
+                <div style="height:30%;width:14px;background:#7dff00"></div>
+                <div style="height:40%;width:14px;background:#7dff00"></div>
+                <div style="height:50%;width:14px;background:#7dff00"></div>
+                <div style="height:65%;width:14px;background:#7dff00"></div>
+                <div style="height:75%;width:14px;background:#7dff00"></div>
+                <div style="height:90%;width:14px;background:#7dff00"></div>
+                <div style="height:100%;width:14px;background:#7dff00"></div>
+
+              </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+              <h4>
+                Recent Students
+              </h4>
+
+              <div class="signal-row">
+                <span>Ahmad Bello</span>
+                <span>May 30, 2026</span>
+              </div>
+
+              <div class="signal-row">
+                <span>Fatima Ali</span>
+                <span>May 30, 2026</span>
+              </div>
+
+              <div class="signal-row">
+                <span>Kabiru Ibrahim</span>
+                <span>May 30, 2026</span>
+              </div>
+
+              <div class="signal-row">
+                <span>Musa Haruna</span>
+                <span>May 30, 2026</span>
+              </div>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+              <h4>
+                Recent Payments
+              </h4>
+
+              <div class="signal-row">
+                <span>John Doe</span>
+                <strong class="green">$299</strong>
+              </div>
+
+              <div class="signal-row">
+                <span>Aisha Sani</span>
+                <strong class="green">$150</strong>
+              </div>
+
+              <div class="signal-row">
+                <span>Maryam Lawal</span>
+                <strong class="green">$200</strong>
+              </div>
+
+              <div class="signal-row">
+                <span>Usman Adam</span>
+                <strong class="green">$100</strong>
+              </div>
+
+            </div>
+
+          </div>
+
+        </main>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+
+  <footer id="contact">
+
+    <div class="container footer-inner">
+
+      <div class="footer-logo">
+        <img src="assets/images/logo.png" alt="Vertex Forex Academy">
+      </div>
+
+      <div class="footer-text">
+        © 2026 Vertex Forex Academy. All Rights Reserved.
+      </div>
+
+      <div class="footer-text">
+        Learn. Trade. Grow.
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================== -->
+
+  <script>
+
+    /* MOBILE MENU */
+
+    const menu = document.querySelector(".mobile-menu");
+    const nav = document.querySelector(".nav-links");
+
+    menu.addEventListener("click", () => {
+
+      nav.classList.toggle("mobile-open");
+
+      if (nav.classList.contains("mobile-open")) {
+
+        nav.style.display = "flex";
+        nav.style.position = "absolute";
+        nav.style.top = "58px";
+        nav.style.left = "12px";
+        nav.style.right = "12px";
+        nav.style.padding = "20px";
+        nav.style.flexDirection = "column";
+        nav.style.alignItems = "flex-start";
+        nav.style.background = "#080b09";
+        nav.style.border = "1px solid #242924";
+        nav.style.borderRadius = "7px";
+
+      } else {
+
+        nav.style.display = "";
+
+      }
+
+    });
+
+
+    /* LIVE MARKET NUMBERS */
+
+    const marketNumbers = document.querySelectorAll(".market-row strong");
+
+    setInterval(() => {
+
+      marketNumbers.forEach((item) => {
+
+        if (Math.random() > .65) {
+
+          const current =
+            parseFloat(
+              item.textContent.replace(/[^\d.-]/g, "")
+            );
+
+          if (!isNaN(current)) {
+
+            const change =
+              (Math.random() * .04 - .02);
+
+            item.style.opacity = ".5";
+
+            setTimeout(() => {
+              item.style.opacity = "1";
+            }, 180);
+
+          }
+
+        }
+
+      });
+
+    }, 2000);
+
+
+    /* SCROLL REVEAL */
+
+    const cards =
+      document.querySelectorAll(
+        ".feature-card, .why-box, .join-box, .phone, .dashboard"
+      );
+
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.style.opacity = "1";
+              entry.target.style.transform = "translateY(0)";
+
+            }
+
+          });
+
+        },
+        {
+          threshold: .08
+        }
+      );
+
+
+    cards.forEach(card => {
+
+      card.style.opacity = "0";
+      card.style.transform = "translateY(15px)";
+      card.style.transition = "opacity .6s ease, transform .6s ease";
+
+      observer.observe(card);
+
+    });
+
+  </script>
+
+</body>
+</html>
